@@ -1,279 +1,841 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SLAY.SOL Leaderboard</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-background: linear-gradient(135deg, #0a2e1a 0%, #0f0f0f 50%, #0e4a1a 100%);
-color: white;
-margin: 0;
-padding: 20px;
-min-height: 100vh;
-}
-.container {
-max-width: 1200px;
-margin: 0 auto;
-}
-.header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 40px;
-}
-.logo-section {
-display: flex;
-align-items: center;
-gap: 15px;
-}
-.logo {
-width: 48px;
-height: 48px;
-background: #16a34a;
-border-radius: 8px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 24px;
-}
-.logo-title {
-color: #22c55e;
-font-size: 12px;
-font-weight: bold;
-}
-.logo-subtitle {
-color: gray;
-font-size: 11px;
-}
-.join-btn {
-background: #16a34a;
-color: white;
-border: none;
-padding: 10px 24px;
-border-radius: 6px;
-font-weight: bold;
-cursor: pointer;
-}
-h1 {
-font-size: 48px;
-margin-bottom: 10px;
-}
-.subtitle {
-color: #22c55e;
-font-size: 13px;
-font-weight: bold;
-}
-.prize-pool {
-background: rgba(29, 127, 49, 0.3);
-border: 1px solid rgba(34, 197, 94, 0.5);
-border-radius: 12px;
-padding: 20px;
-display: inline-flex;
-gap: 15px;
-margin: 40px 0;
-}
-.prize-icon {
-width: 40px;
-height: 40px;
-background: #16a34a;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.prize-amount {
-font-size: 28px;
-font-weight: bold;
-}
-.biweekly-banner {
-background: rgba(34, 197, 94, 0.2);
-border: 1px solid rgba(34, 197, 94, 0.5);
-border-radius: 12px;
-padding: 30px;
-text-align: center;
-margin-bottom: 50px;
-}
-.players-header {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 25px;
-}
-.player-card {
-background: #111827;
-border: 1px solid #1f2937;
-border-radius: 12px;
-padding: 20px;
-display: flex;
-justify-content: space-between;
-margin-bottom: 15px;
-}
-.player-card:hover {
-border-color: rgba(34, 197, 94, 0.5);
-}
-.player-left {
-display: flex;
-gap: 20px;
-align-items: center;
-}
-.rank-badge {
-width: 40px;
-height: 40px;
-background: #1f2937;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-}
-.player-icon {
-width: 40px;
-height: 40px;
-background: #16a34a;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.player-name {
-font-weight: bold;
-margin-bottom: 5px;
-}
-.player-tag {
-font-size: 12px;
-color: gray;
-}
-.player-score {
-font-size: 20px;
-font-weight: bold;
-text-align: right;
-}
-.player-date {
-font-size: 12px;
-color: gray;
-}
-.last-updated {
-text-align: center;
-margin-top: 40px;
-font-size: 12px;
-color: #4b5563;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slay.sol Rewards Leaderboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d1117;
+            color: #e6edf3;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(16, 24, 32, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 45px;
+            height: 45px;
+            background: #1a2332;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            overflow: hidden;
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-info h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #10b981, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-info p {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #22c55e;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            transform: translateY(-2px);
+        }
+
+        .nav-item {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-item:hover {
+            color: #22c55e;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #22c55e;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .main-title {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e6edf3, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .description {
+            color: #9ca3af;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .promo-code {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px dashed #22c55e;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: #22c55e;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .prize-card {
+            background: linear-gradient(135deg, #1a2332, #0d1117);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .trophy-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.5));
+        }
+
+        .prize-label {
+            color: #6b7280;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .prize-value {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .prize-period {
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .countdown-section {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .countdown-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .timer-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .countdown-text h3 {
+            font-size: 14px;
+            color: #22c55e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .timer-display {
+            font-size: 36px;
+            font-weight: 900;
+            color: #e6edf3;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .leader-card {
+            background: linear-gradient(135deg, #1a2332, #0d1117);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.3);
+        }
+
+        .leader-card.rank-1 {
+            border-top: 4px solid #fbbf24;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), #1a2332);
+        }
+
+        .leader-card.rank-2 {
+            border-top: 4px solid #c0c0c0;
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), #1a2332);
+        }
+
+        .leader-card.rank-3 {
+            border-top: 4px solid #cd7f32;
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), #1a2332);
+        }
+
+        .rank-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            border: 4px solid #0d1117;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .leader-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+            font-weight: 900;
+            font-size: 28px;
+        }
+
+        .leader-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #e6edf3;
+        }
+
+        .leader-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .reward-amount {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 900;
+            color: #22c55e;
+        }
+
+        .full-leaderboard {
+            background: linear-gradient(135deg, #1a2332, #0d1117);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: #e6edf3;
+            width: 350px;
+            font-size: 14px;
+        }
+
+        .search-input::placeholder {
+            color: #6b7280;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 150px 150px;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+            transition: background 0.3s;
+        }
+
+        .table-row:hover {
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .rank-cell {
+            font-weight: 900;
+            font-size: 18px;
+            color: #22c55e;
+        }
+
+        .player-cell {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mini-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .player-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .player-info p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .amount-cell {
+            font-size: 16px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .prize-cell {
+            font-size: 14px;
+            font-weight: 700;
+            color: #22c55e;
+            text-align: right;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<div class="header">
-<div class="logo-section">
-<div class="logo">🏆</div>
-<div>
-<div class="logo-title">slay.sol</div>
-<div class="logo-subtitle">lb</div>
-</div>
-</div>
-<button class="join-btn" onclick="window.location.href='http://stake.com/?c=slaysol';">JOIN STAKE</button>
-</div>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-box">
+                <img src="https://via.placeholder.com/45" alt="Logo">
+            </div>
+            <div class="brand-info">
+                <h1>slay.sol</h1>
+                <p>rewards platform</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="social-links">
+                <a href="#" class="social-icon" title="Instagram">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="Discord">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="Kick">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.18L19.82 8 12 11.82 4.18 8 12 4.18zM4 9.93l7 3.5v7.14l-7-3.5V9.93zm9 10.64v-7.14l7-3.5v7.14l-7 3.5z"/>
+                    </svg>
+                </a>
+            </div>
+            <button class="cta-button">Join Now</button>
+        </div>
+    </header>
 
-<div class="subtitle">26/09/25 - 09/10/25</div>
-<h1>LEADERBOARD</h1>
-<p>Compete for the top spots and win exclusive rewards.</p>
+    <main class="main-content">
+        <div class="stats-grid">
+            <div class="hero-card">
+                <div class="hero-content">
+                    <p class="subtitle">🏆 Rewards Challenge</p>
+                    <h2 class="main-title">LEADERBOARD</h2>
+                    <p class="description">
+                        Climb the ranks and compete with players worldwide. Every wager counts towards your position. 
+                        Join the competition now and claim your share of the prize pool!
+                    </p>
+                    <div class="promo-code">USE CODE: SLAYSOL</div>
+                </div>
+            </div>
 
-<div class="prize-pool">
-<div class="prize-icon">🏆</div>
-<div>
-<div style="font-size: 11px; color: gray;">TOTAL PRIZE POOL</div>
-<div class="prize-amount">$20,000</div>
-</div>
-</div>
+            <div class="prize-card">
+                <div class="trophy-icon">🏆</div>
+                <p class="prize-label">Total Prize Pool</p>
+                <div class="prize-value">$25,000</div>
+                <p class="prize-period">Bi-Weekly Distribution</p>
+            </div>
+        </div>
 
-<div class="biweekly-banner">
-<h2>BI-WEEKLY LEADERBOARD</h2>
-<div style="margin-top: 20px; font-size: 14px; color: #9ca3af;">Leaderboard ends in:</div>
-<div id="countdown" style="font-size: 32px; font-weight: bold; margin-top: 10px; color: #22c55e;">00:00:00:00</div>
-</div>
+        <div class="countdown-section">
+            <div class="countdown-left">
+                <div class="timer-icon">
+                    <svg width="28" height="28" fill="none" stroke="#22c55e" stroke-width="2.5" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="countdown-text">
+                    <h3>Competition Active</h3>
+                    <div class="timer-display" id="countdown">3d 23h 59m 59s</div>
+                </div>
+            </div>
+        </div>
 
-<div class="players-header">TOP 4 RANKERS</div>
+        <div class="section-header">
+            <h2 class="section-title">🌟 Top Performers</h2>
+            <p class="section-subtitle">Our highest ranking competitors this bi-weekly period</p>
+        </div>
 
-<div class="player-card">
-<div class="player-left">
-<div class="rank-badge">1</div>
-<div class="player-icon">🏆</div>
-<div>
-<div class="player-name">kagithayyappan</div>
-<div class="player-tag">Rank #1</div>
-</div>
-</div>
-<div>
-<div class="player-score">Rs 650250.52</div>
-</div>
-</div>
+        <div class="leaderboard-grid">
+            <div class="leader-card rank-1">
+                <div class="rank-number">1</div>
+                <div class="leader-avatar">👑</div>
+                <div class="leader-name">lop*****</div>
+                <div class="leader-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Wagered</div>
+                        <div class="stat-value">$13,575.44</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Rank</div>
+                        <div class="stat-value">#1</div>
+                    </div>
+                </div>
+                <div class="reward-amount">$10,000</div>
+            </div>
 
-<div class="player-card">
-<div class="player-left">
-<div class="rank-badge">2</div>
-<div class="player-icon">🏆</div>
-<div>
-<div class="player-name">Megharaj</div>
-<div class="player-tag">Rank #2</div>
-</div>
-</div>
-<div>
-<div class="player-score">Rs 742598.00</div>
-</div>
-</div>
+            <div class="leader-card rank-2">
+                <div class="rank-number">2</div>
+                <div class="leader-avatar">🥈</div>
+                <div class="leader-name">Don****</div>
+                <div class="leader-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Wagered</div>
+                        <div class="stat-value">$2,137.36</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Rank</div>
+                        <div class="stat-value">#2</div>
+                    </div>
+                </div>
+                <div class="reward-amount">$6,000</div>
+            </div>
 
-<div class="player-card">
-<div class="player-left">
-<div class="rank-badge">3</div>
-<div class="player-icon">🏆</div>
-<div>
-<div class="player-name">Thejasveenag</div>
-<div class="player-tag">Rank #3</div>
-</div>
-</div>
-<div>
-<div class="player-score">Rs 610457.37</div>
-</div>
-</div>
+            <div class="leader-card rank-3">
+                <div class="rank-number">3</div>
+                <div class="leader-avatar">🥉</div>
+                <div class="leader-name">hum******</div>
+                <div class="leader-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Wagered</div>
+                        <div class="stat-value">$68.96</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Rank</div>
+                        <div class="stat-value">#3</div>
+                    </div>
+                </div>
+                <div class="reward-amount">$4,000</div>
+            </div>
+        </div>
 
-<div class="player-card">
-<div class="player-left">
-<div class="rank-badge">4</div>
-<div class="player-icon">🏆</div>
-<div>
-<div class="player-name">kaphilraj</div>
-<div class="player-tag">Rank #4</div>
-</div>
-</div>
-<div>
-<div class="player-score">Rs 605615.00</div>
-</div>
-</div>
+        <div class="full-leaderboard">
+            <div class="leaderboard-header">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">All Competitors</h2>
+                </div>
+                <input type="text" class="search-input" placeholder="🔍 Search by username...">
+            </div>
 
+            <div class="leaderboard-table">
+                <div class="table-row">
+                    <div class="rank-cell">#4</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>Zol*****</h4>
+                            <p>Rank 4</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$213.79</div>
+                    <div class="prize-cell">Prize: $2,000</div>
+                </div>
 
-</div>
+                <div class="table-row">
+                    <div class="rank-cell">#5</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>Aam******</h4>
+                            <p>Rank 5</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$207.59</div>
+                    <div class="prize-cell">Prize: $1,200</div>
+                </div>
 
-<script>
-function updateCountdown() {
-var now = new Date().getTime();
-var target = new Date('October 9, 2025 23:59:59').getTime();
-var distance = target - now;
+                <div class="table-row">
+                    <div class="rank-cell">#6</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>Lok*******</h4>
+                            <p>Rank 6</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$160.29</div>
+                    <div class="prize-cell">Prize: $800</div>
+                </div>
 
-if (distance < 0) {
-document.getElementById('countdown').innerHTML = 'ENDED';
-return;
-}
+                <div class="table-row">
+                    <div class="rank-cell">#7</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>slg********</h4>
+                            <p>Rank 7</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$119.02</div>
+                    <div class="prize-cell">Prize: $500</div>
+                </div>
 
-var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                <div class="table-row">
+                    <div class="rank-cell">#8</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>mou*****</h4>
+                            <p>Rank 8</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$73.85</div>
+                    <div class="prize-cell">Prize: $300</div>
+                </div>
 
-document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
-}
+                <div class="table-row">
+                    <div class="rank-cell">#9</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>gol********</h4>
+                            <p>Rank 9</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$44.87</div>
+                    <div class="prize-cell">Prize: $150</div>
+                </div>
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-</script>
+                <div class="table-row">
+                    <div class="rank-cell">#10</div>
+                    <div class="player-cell">
+                        <div class="mini-avatar">👤</div>
+                        <div class="player-info">
+                            <h4>den*********</h4>
+                            <p>Rank 10</p>
+                        </div>
+                    </div>
+                    <div class="amount-cell">$38.45</div>
+                    <div class="prize-cell">Prize: $50</div>
+                </div>
+            </div>
 
+            <p class="footer-text" id="lastUpdated">Last updated: Loading...</p>
+        </div>
+    </main>
+
+    <script>
+        // Set end date to October 9, 2025 at 23:59:59 UTC
+        const endDate = new Date('2025-10-09T23:59:59Z');
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = endDate - now;
+            
+            if (timeLeft <= 0) {
+                document.getElementById('countdown').textContent = 'Competition Ended';
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        // Update last updated time (today at 00:00 UTC in user's timezone)
+        function updateLastUpdatedTime() {
+            const now = new Date();
+            const todayMidnightUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
+            
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const formattedDate = todayMidnightUTC.toLocaleString('en-US', options);
+            document.getElementById('lastUpdated').textContent = `Last updated: ${formattedDate}`;
+        }
+        
+        // Update countdown immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Update last updated time
+        updateLastUpdatedTime();
+
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.table-row');
+            
+            rows.forEach(row => {
+                const username = row.querySelector('h4').textContent.toLowerCase();
+                if (username.includes(search)) {
+                    row.style.display = 'grid';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
